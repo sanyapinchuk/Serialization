@@ -20,8 +20,6 @@ namespace Serialization
 
         private string path = "../../files/objects.xml";
 
-        //private Form3_FormClosing formClosing = Form3_CLOSE;
-
         public Form1()
         {
             InitializeComponent();
@@ -37,22 +35,18 @@ namespace Serialization
         private void UpdateListObjects()
         {
             listBox1.Items.Clear();
-            int i = 0;
             foreach (var item in allPersons.Managers)
             {
                 listBox1.Items.Add(item.GetType().Name);
             }
-            i = 0;
             foreach (var item in allPersons.Workers)
             {
                 listBox1.Items.Add(item.GetType().Name);
             }
-            i = 0;
             foreach (var item in allPersons.Individuals)
             {
                 listBox1.Items.Add(item.GetType().Name);
             }
-            i = 0;
             foreach (var item in allPersons.Entitys)
             {
                 listBox1.Items.Add(item.GetType().Name);
@@ -71,18 +65,9 @@ namespace Serialization
             {
                 object obj = listBox1.SelectedItem;
                 object selectedObject = GetObjectFromList(listBox1.SelectedIndex);
-                //Type tsdcx = typeof(listBox1.SelectedItem);
                 string name = obj as string;
-                //string name2 = obj.GetType().Name;
-                //string name3 = obj.GetType().FullName;
-                //string name4 = obj.GetType().ToString();
                 var oneType = typeof(ListPersons).GetField(name + "s");
-                //var property = typeof(AllPersons).GetProperty(name);
-                //Type type = property.GetType();
-                //var properteis = type.GetFields();
                 var type = oneType.FieldType;
-                //var typeOfList = type.GetType().GetGenericArguments().GetType();
-                //var typeOfList = GetTypeList(type.get);
                 var fields = type.GetProperties();
                 listBox2.Items.Clear();
                 listBox3.Items.Clear();
@@ -101,7 +86,6 @@ namespace Serialization
             StreamReader streamReader = new StreamReader(path);
             allPersons = (AllPersons)xmlSerializer.Deserialize(streamReader);
             streamReader.Close();
-            //listBox1.Invalidate();
             UpdateListObjects();    
         }
         private void button1_Click(object sender, EventArgs e)
@@ -112,10 +96,6 @@ namespace Serialization
         private void button5_Click(object sender, EventArgs e)
         {
             Serialize(path);
-            /*foreach (var individual in allPersons.Individual)
-            {
-                individual.Serialize(path);
-            }*/
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -219,52 +199,56 @@ namespace Serialization
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int num = listBox1.SelectedIndex;
-            int i = 0;
-            foreach (var item in allPersons.Managers)
+            if(listBox2.SelectedIndex >=0)
             {
-                if (i == num)
+                int num = listBox1.SelectedIndex;
+                int i = 0;
+                foreach (var item in allPersons.Managers)
                 {
-                    var newForm = new Form3(item,typeof(Manager),listBox2.Items[listBox2.SelectedIndex].ToString());
-                    newForm.Show();
-                    newForm.FormClosing += Form3_CLOSE;
-                    return;
+                    if (i == num)
+                    {
+                        var newForm = new Form3(item, typeof(Manager), listBox2.Items[listBox2.SelectedIndex].ToString());
+                        newForm.Show();
+                        newForm.FormClosing += Form3_CLOSE;
+                        return;
+                    }
+                    ++i;
                 }
-                ++i;
-            }
-            foreach (var item in allPersons.Workers)
-            {
-                if (i == num)
+                foreach (var item in allPersons.Workers)
                 {
-                    var newForm = new Form3(item, typeof(Worker), listBox2.Items[listBox2.SelectedIndex].ToString());
-                    newForm.Show();
-                    newForm.FormClosing += Form3_CLOSE;
-                    return;
+                    if (i == num)
+                    {
+                        var newForm = new Form3(item, typeof(Worker), listBox2.Items[listBox2.SelectedIndex].ToString());
+                        newForm.Show();
+                        newForm.FormClosing += Form3_CLOSE;
+                        return;
+                    }
+                    ++i;
                 }
-                ++i;
-            }
-            foreach (var item in allPersons.Individuals)
-            {
-                if (i == num)
+                foreach (var item in allPersons.Individuals)
                 {
-                    var newForm = new Form3(item, typeof(Individual), listBox2.Items[listBox2.SelectedIndex].ToString());
-                    newForm.Show();
-                    newForm.FormClosing += Form3_CLOSE;
-                    return;
+                    if (i == num)
+                    {
+                        var newForm = new Form3(item, typeof(Individual), listBox2.Items[listBox2.SelectedIndex].ToString());
+                        newForm.Show();
+                        newForm.FormClosing += Form3_CLOSE;
+                        return;
+                    }
+                    ++i;
                 }
-                ++i;
-            }
-            foreach (var item in allPersons.Entitys)
-            {
-                if (i == num)
+                foreach (var item in allPersons.Entitys)
                 {
-                    var newForm = new Form3(item, typeof(Entity), listBox2.Items[listBox2.SelectedIndex].ToString());
-                    newForm.Show();
-                    newForm.FormClosing += Form3_CLOSE;
-                    return;
+                    if (i == num)
+                    {
+                        var newForm = new Form3(item, typeof(Entity), listBox2.Items[listBox2.SelectedIndex].ToString());
+                        newForm.Show();
+                        newForm.FormClosing += Form3_CLOSE;
+                        return;
+                    }
+                    ++i;
                 }
-                ++i;
             }
+            
         }
     }
 }

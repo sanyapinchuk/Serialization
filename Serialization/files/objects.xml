@@ -6,7 +6,7 @@
       <Name>none</Name>
       <Sex>none</Sex>
       <IsNew>false</IsNew>
-      <IsPassport>false</IsPassport>
+      <IsPassport>true</IsPassport>
       <IsAbonement>false</IsAbonement>
     </Individual>
     <Individual>

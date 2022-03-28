@@ -33,9 +33,6 @@ namespace Serialization
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //string typeOfField = listBox3.Items[listBox1.SelectedIndex].ToString();
-            // Type typeOfField = listBox3.Items[listBox1.SelectedIndex].GetType();
-            //   var field = Activator.CreateInstance(typeOfField);
             try
             {
                 

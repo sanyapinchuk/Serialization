@@ -24,14 +24,49 @@ namespace Serialization
         {
             InitializeComponent();
 
-            
+
         }
+
         public void Serialize(String path)
         {
-            StreamWriter streamWriter = new StreamWriter(path);
+           /*StreamWriter streamWriter = new StreamWriter(path);
             xmlSerializer.Serialize(streamWriter, allPersons);
+            streamWriter.Close();*/
+            StreamWriter streamWriter = new StreamWriter(path);
+            streamWriter.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            streamWriter.WriteLine("<AllPersons xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
+
+            var type = typeof(AllPersons);
+            var fields = type.GetFields();
+            foreach (var field in fields)
+            {
+                var prop = field.GetValue(allPersons);
+                if(prop!= null)
+                {
+                    streamWriter.WriteLine("\t <" + field.Name + ">");
+
+                    var enumer = (IList)prop;
+                    foreach (var value in enumer)
+                    {
+                        
+                        streamWriter.WriteLine("\t\t <" + field.Name.Remove(field.Name.Length-1) + ">") ;
+
+                        var propeties = value.GetType().GetProperties();
+                        foreach(var prop2 in propeties)
+                        {
+                            streamWriter.WriteLine("\t\t\t<"+prop2.Name+">"+prop2.GetValue(value)+ "</" + prop2.Name + ">");
+                        }
+
+                        streamWriter.WriteLine("\t\t </" + field.Name.Remove(field.Name.Length - 1) + ">");
+                    }
+
+                    streamWriter.WriteLine("\t </" + field.Name + ">");
+                }
+            }
+            streamWriter.WriteLine("</AllPersons>");
             streamWriter.Close();
         }
+
         private void UpdateListObjects()
         {
             listBox1.Items.Clear();
@@ -81,10 +116,113 @@ namespace Serialization
             }
         }
 
+
+        private string GetName(string str)
+        {
+            string result = "";
+            int i = 0;
+            while (i < str.Length && str[i]!='<')
+            {
+                ++i;
+            }
+            ++i;
+            while(i < str.Length && str[i]!='>')
+            {
+
+                if (str[i] == '/')
+                {
+                    ++i;
+                    continue;
+                }
+                result += str[i];
+                ++i;
+            }
+            return result;
+        }
+
+        private string GetVariableValue(string str)
+        {
+            string result = "";
+            int i = 0;
+            while (i < str.Length && str[i] != '>')
+            {
+                ++i;
+            }
+            ++i;
+            while (i < str.Length && str[i] != '<')
+            {
+                result += str[i];
+                ++i;
+            }
+            return result;
+        }
+
         public void DeSerialize(String path)
         {
             StreamReader streamReader = new StreamReader(path);
-            allPersons = (AllPersons)xmlSerializer.Deserialize(streamReader);
+            //allPersons = (AllPersons)xmlSerializer.Deserialize(streamReader);
+
+            allPersons = new AllPersons();
+            streamReader.ReadLine();
+            streamReader.ReadLine();
+            string str = streamReader.ReadLine(); //<<<individuals
+            while (str!="</AllPersons>")
+            {
+                string listName = GetName(str);  //individuals
+                var fieldList = typeof(AllPersons).GetField(listName);
+                var fieldType = fieldList.FieldType;
+                var fieldValue = fieldList.GetValue(allPersons);
+
+                //fieldValue = Activator.CreateInstance(fieldType);
+
+                str = streamReader.ReadLine();   //<<<individual
+                string nextline = GetName(str);     //individual
+                string typeName = nextline;         //individual
+                while (nextline!= listName)
+                {
+                    
+                    var elementofListType = typeof(ListPersons).GetField(listName).FieldType; //Individual(TYPE)
+                    var obj = Activator.CreateInstance(elementofListType);
+                    str= streamReader.ReadLine();
+                    string FieldFullName = GetName(str);
+                    
+                    while(FieldFullName != typeName)
+                    {
+                        string VariableValue = GetVariableValue(str);
+
+                        var FieldOfListType = elementofListType.GetProperty(FieldFullName).PropertyType;
+                        
+                        object value;
+                        if (FieldOfListType != typeof(string))
+                        {
+                            value = Activator.CreateInstance(FieldOfListType);
+                        }
+                        
+                        try
+                        {
+                            value = Convert.ChangeType(VariableValue, FieldOfListType);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("uncorreect type");
+                            return;
+                        }
+
+                        elementofListType.GetProperty(FieldFullName).SetValue(obj, value, null); // нету приведения к типу 
+                        str = streamReader.ReadLine();
+                        FieldFullName = GetName(str);
+                    }
+                    var list = (IList)fieldValue;
+                    list.Add(obj);
+                    nextline = streamReader.ReadLine();
+                    nextline= GetName(nextline);
+                }
+                str = streamReader.ReadLine();
+
+            }
+                
+
+
             streamReader.Close();
             UpdateListObjects();    
         }

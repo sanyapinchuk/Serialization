@@ -2,7 +2,7 @@
 <AllPersons xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	 <Individuals>
 		 <Individual>
-			<IsPassport>True</IsPassport>
+			<IsPassport>False</IsPassport>
 			<IsAbonement>False</IsAbonement>
 			<IsNew>False</IsNew>
 			<Age>0</Age>
@@ -11,28 +11,20 @@
 		 </Individual>
 	 </Individuals>
 	 <Entitys>
-		 <Entity>
-			<RegistrationNumber>none</RegistrationNumber>
-			<NComponyName>none</NComponyName>
-			<DataOfGeristrarion>none</DataOfGeristrarion>
-			<IsNew>False</IsNew>
-			<Age>0</Age>
-			<Name>none</Name>
-			<Sex>none</Sex>
-		 </Entity>
 	 </Entitys>
 	 <Managers>
+		 <Manager>
+			<OfficeStage>two</OfficeStage>
+			<OfficeName>first</OfficeName>
+			<WorkPhone>3752941</WorkPhone>
+			<Experience>big</Experience>
+			<Salary>21031</Salary>
+			<Function>manag</Function>
+			<Age>32</Age>
+			<Name>Oleg</Name>
+			<Sex>Oleg</Sex>
+		 </Manager>
 	 </Managers>
 	 <Workers>
-		 <Worker>
-			<FactoryAdress>none</FactoryAdress>
-			<ClassWork>none</ClassWork>
-			<Experience>none</Experience>
-			<Salary>2342</Salary>
-			<Function>none</Function>
-			<Age>0</Age>
-			<Name>none</Name>
-			<Sex>none</Sex>
-		 </Worker>
 	 </Workers>
 </AllPersons>

@@ -39,7 +39,7 @@ namespace Serialization
             var type = typeof(AllPersons);
             var fields = type.GetFields();
             foreach (var field in fields)
-            {
+            { 
                 var prop = field.GetValue(allPersons);
                 if(prop!= null)
                 {

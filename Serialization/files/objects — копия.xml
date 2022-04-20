@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AllPersons xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Individuals>
-    <Individual>
-      <Age>0</Age>
-      <Name>none</Name>
-      <Sex>none</Sex>
-      <IsNew>false</IsNew>
-      <IsPassport>false</IsPassport>
-      <IsAbonement>false</IsAbonement>
-    </Individual>
-  </Individuals>
-  <Entitys>
-    <Entity>
-      <Age>0</Age>
-      <Name>none</Name>
-      <Sex>none</Sex>
-      <IsNew>false</IsNew>
-      <RegistrationNumber>none</RegistrationNumber>
-      <NComponyName>none</NComponyName>
-      <DataOfGeristrarion>none</DataOfGeristrarion>
-    </Entity>
-  </Entitys>
-  <Managers />
-  <Workers />
+<AllPersons xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	 <Individuals>
+		 <Individual>
+			<IsPassport>False</IsPassport>
+			<IsAbonement>False</IsAbonement>
+			<IsNew>False</IsNew>
+			<Age>0</Age>
+			<Name>none</Name>
+			<Sex>none</Sex>
+		 </Individual>
+	 </Individuals>
+	 <Entitys>
+	 </Entitys>
+	 <Managers>
+		 <Manager>
+			<OfficeStage>two</OfficeStage>
+			<OfficeName>first</OfficeName>
+			<WorkPhone>3752941</WorkPhone>
+			<Experience>big</Experience>
+			<Salary>21031</Salary>
+			<Function>manag</Function>
+			<Age>32</Age>
+			<Name>Oleg</Name>
+			<Sex>Oleg</Sex>
+		 </Manager>
+	 </Managers>
+	 <Workers>
+	 </Workers>
 </AllPersons>

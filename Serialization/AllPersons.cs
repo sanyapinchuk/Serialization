@@ -16,9 +16,9 @@ namespace Serialization
             Individual.Add(new Individual(true,true,false,23,"Boris","Male"));*/
         }
 
-        public List<Individual> Individuals = new List<Individual>();
-        public List<Entity> Entitys  = new List<Entity>();
-        public List<Manager> Managers  = new List<Manager>();
-        public List<Worker> Workers = new List<Worker>();
+        public List<Individual> Individuals { get; set; } = new List<Individual>();
+        public List<Entity> Entitys { get; set; } = new List<Entity>();
+        public List<Manager> Managers { get; set; } = new List<Manager>();
+        public List<Worker> Workers { get; set; } = new List<Worker>();
     }
 }

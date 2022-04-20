@@ -21,7 +21,7 @@ namespace Serialization
         public Form2()
         {
             InitializeComponent();
-            var properteis = typeof(AllPersons).GetFields();
+            var properteis = typeof(AllPersons).GetProperties();
             foreach(var p in properteis)
             {
                 checkedListBox1.Items.Add(p.Name);
@@ -39,8 +39,8 @@ namespace Serialization
             }
             object obj = checkedListBox1.SelectedItem;
             string name = obj as string;
-            var oneType = typeof(ListPersons).GetField(name);
-            type = oneType.FieldType;
+            var oneType = typeof(ListPersons).GetProperty(name);
+            type = oneType.PropertyType;
             createdVariable = Activator.CreateInstance(type);
             var fields = type.GetProperties();
             listBox1.Items.Clear();
@@ -99,7 +99,7 @@ namespace Serialization
 
         private void AddObject(Type type, object existField, object obj, string typename)
         {
-            var field = typeof(AllPersons).GetField(type.Name+"s");
+            var field = typeof(AllPersons).GetProperty(type.Name+"s");
             var value = field?.GetValue(Form1.allPersons);
             ((IList)value).Add(obj);
         }
@@ -107,7 +107,7 @@ namespace Serialization
         private void button2_Click(object sender, EventArgs e)
         {
             
-            var field = typeof(AllPersons).GetField(type.Name+"s");
+            var field = typeof(AllPersons).GetProperty(type.Name+"s");
             var value = field?.GetValue(Form1.allPersons);
             Type type2 = type;
             AddObject(type2, value, createdVariable, type2.Name);

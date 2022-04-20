@@ -8,9 +8,9 @@ namespace Serialization
 {
     public class ListPersons
     {
-        public Individual Individuals;
-        public Entity Entitys;
-        public Manager Managers;
-        public Worker Workers;
+        public Individual Individuals { get; set; }
+        public Entity Entitys { get; set; }
+        public Manager Managers { get; set; }
+        public Worker Workers { get; set; }
     }
 }

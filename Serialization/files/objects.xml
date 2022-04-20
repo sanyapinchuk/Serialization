@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AllPersons xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	 <Individuals>
-		 <Individual>
+		<Individual>
 			<IsPassport>False</IsPassport>
 			<IsAbonement>False</IsAbonement>
+			<SomeList>
+				<Int32>3</Int32>
+				<Int32>5</Int32>
+			</SomeList>
+			<Arr>
+				<Int32[]>
+					<Int32>1</Int32>
+					<Int32>2</Int32>
+					<Int32>3</Int32>
+				</Int32[]>
+				<Int32[]>
+					<Int32>4</Int32>
+					<Int32>5</Int32>
+					<Int32>9</Int32>
+				</Int32[]>
+			</Arr>
 			<IsNew>False</IsNew>
 			<Age>0</Age>
 			<Name>none</Name>
 			<Sex>none</Sex>
-		 </Individual>
+		</Individual>
 	 </Individuals>
 	 <Entitys>
 	 </Entitys>
 	 <Managers>
-		 <Manager>
-			<OfficeStage>two</OfficeStage>
-			<OfficeName>first</OfficeName>
-			<WorkPhone>3752941</WorkPhone>
-			<Experience>big</Experience>
-			<Salary>21031</Salary>
-			<Function>manag</Function>
-			<Age>32</Age>
-			<Name>Oleg</Name>
-			<Sex>Oleg</Sex>
-		 </Manager>
 	 </Managers>
 	 <Workers>
 	 </Workers>
